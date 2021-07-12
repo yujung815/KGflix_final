@@ -7,6 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<header>
+        <jsp:include page="common/header.jsp"/>
+    </header>
 <h1>비밀번호 찾기</h1>
 <form action="/getPW" method="POST">
 <table>

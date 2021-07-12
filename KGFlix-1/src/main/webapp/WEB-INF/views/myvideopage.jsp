@@ -8,6 +8,11 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<header>
+        <jsp:include page="common/header.jsp"/>
+    </header>
+<section>
+<article>
 <h1> 내가 찜한 영상</h1>
 
 <c:foreach var="clip" items="${moveList }">
@@ -15,6 +20,7 @@
 								<button onclick="/watchmovie">찜 목록에서 제거</button>
 	</c:out>
 </c:foreach>
-
+</article>
+</section>
 </body>
 </html>
