@@ -61,7 +61,7 @@ input{
 		</table>
 	</form>
 		<table>
-			<tr><td>${loginmessage }</td></tr>
+			<tr><td>${loginfail}</td></tr>
 			<tr><td>아직 KG플릭스 가족이 아니신가요?<a href="/joinpage">회원가입하기</a></td></tr>
 			<tr><td><a href="/findID">아이디 찾기</a>|<a href="/findPW">비밀번호 찾기</a></td></tr>
 		</table>

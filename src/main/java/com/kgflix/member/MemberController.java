@@ -16,11 +16,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.context.request.SessionScope;
+import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributesModelMap;
 
 import com.kgflix.member.dao.MemberDAO;
 import com.kgflix.member.vo.MemberVO;
+
+import lombok.Cleanup;
 
 
 @Controller
@@ -61,14 +64,21 @@ public class MemberController {
 			return "loginpage";
 		}
 
+	@RequestMapping("/logout")
+	public String logout(@SessionAttribute ("member") MemberVO member,WebRequest req) {
+		req.removeAttribute("member",WebRequest.SCOPE_SESSION); //session scope에 저장되어져 있는 member정보를 삭제
+		return "redirect:/main";
+	}
+	
+	
 	@RequestMapping(value="/login", method=RequestMethod.POST) 
 		 public String loginStart(@RequestParam ("id") String id, @RequestParam("pw") String pw ,HttpSession session) { 
 			MemberVO member=dao.login(id, pw); 
 				if (member!=null) {		
 					session.setAttribute("member",member); //객체 생성해서 넘겨줌.
 					return "redirect:/main";
-				
 				}else {
+					session.setAttribute("loginfail","로그인 실패 비밀번호를 확인해주세요");
 			    	return "loginpage";
 			 	}
 		}
@@ -101,15 +111,10 @@ public class MemberController {
 	@RequestMapping(value = "/checkIdExist", method = RequestMethod.POST)
 	public String checkIdExist(Model model1, HttpServletRequest req) {
 		String memberid = req.getParameter("id");
-		MemberVO mvo = dao.getMembInfo(memberid);
-		if (mvo == null) {
-			model1.addAttribute("idresult", "사용할 수 있는 아이디 입니다.");
-			model1.addAttribute("id", req.getParameter("id"));
-		} else {
-			model1.addAttribute("idresult", "이미 존재하는 아이디 입니다.");
-			model1.addAttribute("id", req.getParameter(""));
-		}
-		return "";
+		MemberVO mvo = null;
+		mvo=dao.getMembInfo(memberid);
+		model1.addAttribute(mvo);
+		return "joinmember";
 
 		// 중복아이디체크
 	}
@@ -133,7 +138,7 @@ public class MemberController {
 	}
 
 	
-	@RequestMapping(value="updateMembInfo",method=RequestMethod.POST)
+	@RequestMapping("/updateMembInfo")
 	public String updateMembInfo(HttpServletRequest req,@SessionAttribute("member") MemberVO member) {
 		String pw=req.getParameter("newPW1");
 		String tel=req.getParameter("tel");
