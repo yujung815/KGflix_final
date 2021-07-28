@@ -9,19 +9,21 @@
 <title>Insert title here</title>
 <style type="text/css">
 body{
+	
 	text-align:center;
+	
 }
-
 h1{
 	color:white;
-
 }
-
 td{
 	color:white;
 	padding:10px;
 	margin:7px;
-	
+	width:
+}
+table{
+	text-align:center;
 }
 #tablemember{
 	text-align:left;
@@ -32,7 +34,6 @@ td{
 #buttons{
 	border:0;
 	align:center;
-
 }
 #submit{
 	box-radius:2px;
@@ -50,23 +51,23 @@ td{
 	font-size:4px;
 }
 
-
 </style>
-<script type="text/javascript">
-$(document).ready(function(){
-	var password = document.getElementById("password")
-	  , confirm_password = document.getElementById("confirm_password");
 
-	function validatePassword(){
-	  if(password.value != confirm_password.value) {
-	    confirm_password.setCustomValidity("Passwords Don't Match");
-	  } else {
-	    confirm_password.setCustomValidity('');
-	  }
-	}
-	password.onchange = validatePassword;
-	confirm_password.onkeyup = validatePassword;
-})
+<script type="text/javascript">
+	$(document).ready(function(){
+		var password = document.getElementById("password")
+		  , confirm_password = document.getElementById("confirm_password");
+	
+		function validatePassword(){
+		  if(password.value != confirm_password.value) {
+		    confirm_password.setCustomValidity("비밀번호가 일치하지 않습니다.");
+		  } else {
+		    confirm_password.setCustomValidity('');
+		  }
+		}
+		password.onchange = validatePassword;
+		confirm_password.onkeyup = validatePassword;
+	}) 
  </script>
 
 </head>
@@ -77,32 +78,34 @@ $(document).ready(function(){
    <section>
 <article>
 	<h1>정보수정</h1>
-		<form action="/updateMembInfo" method="post" class="pure-form">
-			<table align="center" border="2" id="tablemeber">
-				<tr><td>이름</td><td>${member.name }</td></tr>
-				<tr><td>아이디</td><td>${member.id }</td></tr>
+		<form action="/updateMembInfo" method="post" >
+			<table id="tablemeber">
+				<tr><td>이름</td><td>${member.name}</td></tr>
+				<tr><td>아이디</td><td>${member.id}</td></tr>
 				
-				<tr><td>비밀번호변경</td><td><input type="password" placeholder="Password" id="password" required> </td></tr>
+				<tr><td>비밀번호변경</td><td><input type="password" placeholder="Password" id="password" name="pw" required> </td></tr>
 				<tr><td>비밀번호확인</td><td><input type="password" placeholder="Confirm Password" id="confirm_password" required></td></tr>
-				<tr><td colspan="2"><p id="pwmismatch"> </p></td></tr>
 				<!-- onkeypress함수에 의해서 비밀번호 일치 여부 확인 p태그통해서 'html'값 보내준다.  -->
 				
 				
 				<tr><td>전화번호</td><td><input type="text" name="tel" value="${member.tel }"></td></tr>
 				<tr><td>이메일</td><td><input type="text" name="email" value="${member.email }"></td></tr>
 			</table>
-			<table id="buttons" align="center">
+			<table id="buttons">
 				<tr><td colspan="2" align="left"><button type="submit" id="submit" >회원정보 수정하기</button></td><tr>
 				<!-- <td><input type="reset" value="원래대로"></td></tr> -->
 				<tr><tr>
-				
-				
 			</table>				
+		</form>
+				
 				<h1>도움이 필요하세요? <a href="/고객센터주소">고객센터 이동하기</a></h1>
 				<div id="memberdelete">
-					<a href="/deleteMembInfo">회원 탈퇴하기</a>
+				<form action="/deleteMembInfo" method="post">
+					<input type="hidden" name="member" value="${member}">
+					
+					<input type="submit" value="회원 탈퇴하기">
+					</form>
 				</div>
-		</form>
 	</article>
 	</section>
 </body>

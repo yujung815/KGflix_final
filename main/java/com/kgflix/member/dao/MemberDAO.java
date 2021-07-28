@@ -14,6 +14,8 @@ public interface MemberDAO {
 	public void deleteMembInfo(String id);
 	public MemberVO login(String id,String pw);
 	public void insertMember(String id, String pw, String name, String tel, String email);
+	public MemberVO findId(String name, String email);
+	public int idExist(String id);
 
 
 }

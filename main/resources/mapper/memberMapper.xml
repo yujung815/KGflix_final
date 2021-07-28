@@ -16,19 +16,33 @@
 		FROM user_table 
 		WHERE id=#{id}
 	</select>
+	
+	<select id="findId" resultType="com.kgflix.member.vo.MemberVO">
+		SELECT *
+		FROM user_table
+		WHERE name=#{name} and email=#{email}
+	</select>
+	
 
-	<insert id="insertMember">
+	<insert id="insertMember" >
 		INSERT INTO user_table(id, pw, name, tel, email)
 		VALUES (#{id}, #{pw}, #{name}, #{tel}, #{email})
 	</insert>
 
+	<select id = "idExist" parameterType="String" resultType="int">
+    SELECT COUNT(*) 
+    FROM user_table
+    WHERE ID = #{id}
+	</select>
+	
+	
 	<update id="updateMembInfo" >
 		UPDATE user_table 
 		SET	 pw=#{pw}, tel=#{tel} 
 		WHERE id=#{id}
 	</update>
 	
-	<delete id="deleteMembInfo" parameterType="String">
+	<delete id="deleteMembInfo">
 		DELETE * 
 		FROM user_table 
 		WHERE id=#{id}

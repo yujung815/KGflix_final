@@ -1,6 +1,6 @@
 package com.kgflix.member;
 
-import java.lang.reflect.Member;
+
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -8,22 +8,16 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
-import org.springframework.web.context.request.SessionScope;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.servlet.mvc.support.RedirectAttributesModelMap;
 
 import com.kgflix.member.dao.MemberDAO;
 import com.kgflix.member.vo.MemberVO;
-
-import lombok.Cleanup;
 
 
 @Controller
@@ -31,9 +25,6 @@ public class MemberController {
 	@Autowired
 	MemberDAO dao;
 	 
-	
-	
-
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String strart(RedirectAttributes reAttr) {
 			
@@ -52,15 +43,12 @@ public class MemberController {
 	}
 	@RequestMapping(value="/mainpage", method=RequestMethod.POST)
 	public String mainPage(@RequestParam ("member") MemberVO member,SessionAttribute session) {
-		
 		return "mainpage";
-		
 	}
 		
 	@RequestMapping(value="/loginpage",method=RequestMethod.GET)
 		public String loginpage(Model model) {
 			model.addAttribute("loginmessage","");
-			
 			return "loginpage";
 		}
 
@@ -103,51 +91,62 @@ public class MemberController {
 		String pw=req.getParameter("pw");
 		String name=req.getParameter("name");
 		String tel=req.getParameter("tel");
-		String email=req.getParameter("email");
+		String email=(req.getParameter("email").toString());
 		dao.insertMember(id,pw,name,tel,email);
 		return "redirect:/main";
 	}
 	
-	@RequestMapping(value = "/checkIdExist", method = RequestMethod.POST)
-	public String checkIdExist(Model model1, HttpServletRequest req) {
-		String memberid = req.getParameter("id");
-		MemberVO mvo = null;
-		mvo=dao.getMembInfo(memberid);
-		model1.addAttribute(mvo);//member 객체반환 ,but null인지만 따짐
-		return "joinmember";
+	@ResponseBody
+	@RequestMapping(value="/checkSignup",method=RequestMethod.POST)
+	public String checkSignup(HttpServletRequest request, Model model,MemberDAO dao) {
+		String id=request.getParameter("id");
+		int rowcount=dao.idExist(id);
+		model.addAttribute("data",rowcount);
+		return String.valueOf(rowcount);
+	}
 
-		// 중복아이디체크
+	
+	@RequestMapping(value = "/findID" ,method=RequestMethod.GET)
+	public String openfindId() {
+		return "findID";
 	}
 	
-	@RequestMapping(value = "/findID")
-	public String findID() {
-		return "findID";// 아이디찾기 페이지
+	@RequestMapping(value = "/findID" ,method=RequestMethod.POST)
+	public String findID(@RequestParam ("name") String name,
+				@RequestParam ("email") String email, MemberVO member) {
+		member=dao.findId(name,email);
+		return "loginpage";
 	}
 
-	@RequestMapping(value = "/findPW")
-	public String findPW() {
+	@RequestMapping(value = "/findPW", method=RequestMethod.GET)
+	public String openfindPw() {
 		return "findPW";
+	}
+	
+	@RequestMapping(value = "/findPW", method=RequestMethod.POST)
+	public String findPW(@RequestParam ("name") String name,@RequestParam ("id") String id,
+						@RequestParam ("email") String email,MemberVO member,Model model) {
+		String result="findPW";	
+		member.setName(name);
+		member.setId(id);
+		member.setEmail(email);
+		member=dao.getMembInfo(id);
+		if(member.getName().equals(name)&&member.getEmail().equals(email)) {
+			model.addAttribute(member);
+			result="resetPw";
+		}
+		return result;
 		// 비번찾기 페이지
 	}
 
-
 	@RequestMapping(value = "/myinfo")
 	public String myinfo(@SessionAttribute ("member") MemberVO member) {
-		
 		return "myinfo";
 	}
 
-	/*
-	 * @RequestMapping(value="/ispwsame", method=RequestMethod.POST) public String
-	 * isPwSame(@Re) {
-	 * 
-	 * }
-	 */
-	
-	
 	@RequestMapping(value="/updateMembInfo",method=RequestMethod.POST)
 	public String updateMembInfo(HttpServletRequest req,@SessionAttribute("member") MemberVO member) {
-		String pw=req.getParameter("newPW1");
+		String pw=req.getParameter("pw");
 		String tel=req.getParameter("tel");
 		String email=req.getParameter("email");
 		member.setPw(pw);	
@@ -158,8 +157,6 @@ public class MemberController {
 		return "redirect:/myinfo";
 	}
 	
-	
-
 	@RequestMapping(value = "/orderpage", method = RequestMethod.GET)
 	public String orderpage() {
 		return "orderpage";
@@ -168,10 +165,10 @@ public class MemberController {
 	
 	@RequestMapping(value="/deleteMembInfo", method=RequestMethod.POST)
 	public String deleteMembInfo(HttpSession session) {
+		MemberVO member=(MemberVO) session.getAttribute("member");
+		dao.deleteMembInfo(member.getId());
 		session.setAttribute("member",null);// 회원탈퇴를 한 후 로그인했던 정보를 삭제해 준다.
 		return "redirect:/main";//main화면으로 이동
 	}
-	
-	
 
 }
