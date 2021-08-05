@@ -7,8 +7,8 @@ public class CsVO {
 
 	private int cs_no;
 	private String user_no;
-	private String cs_title;
 	private String e_mail;
+	private String cs_title;
 	private String cs_content;
 	private Date regdate;
 	
@@ -96,8 +96,6 @@ public class CsVO {
 		this.regdate = regdate;
 	}
 
-
-	
 	
 
 

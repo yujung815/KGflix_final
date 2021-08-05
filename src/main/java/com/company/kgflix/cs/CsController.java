@@ -17,7 +17,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.company.kgflix.cs.dao.CsDAO;
 import com.company.kgflix.cs.vo.CsVO;
 import com.company.kgflix.cs.vo.MemberVO;
-import com.company.kgflix.cs.vo.payVO;
 
 @Controller
 public class CsController {
@@ -38,11 +37,9 @@ public class CsController {
 	public String index() {
 		try {
 			MemberVO mvo = restTemplate.getForObject("http://main-service/rest_cs", MemberVO.class);
-			payVO pvo = restTemplate.getForObject("http://main-service/rest_pay", payVO.class);
 			if (mvo != null) {
 				session = req.getSession();
-				session.setAttribute("member", mvo);
-				session.setAttribute("pvo", pvo);
+				session.setAttribute("userInfo", mvo);
 			}
 		} catch (Exception e) {
 		}
@@ -61,9 +58,7 @@ public class CsController {
 	}
 
 	@PostMapping("/write") // insertinfo
-	public String insertinfo(RedirectAttributes red , String user_no , String e_mail , String cs_title , String cs_content) {
-		CsVO cvo = new CsVO(user_no,e_mail,cs_title,cs_content);
-		
+	public String insertinfo(CsVO cvo, RedirectAttributes red) {
 		dao.insertInfo(cvo);
 		red.addAttribute("user_no", cvo.getUser_no());
 

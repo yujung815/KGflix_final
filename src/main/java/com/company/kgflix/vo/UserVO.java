@@ -11,10 +11,6 @@ public class UserVO {
 	private String email;
 	private int subs;
 	private Date orderday;
-	private Date add_months;
-	private int status;
-	
-	
 	public int getUser_no() {
 		return user_no;
 	}
@@ -63,38 +59,4 @@ public class UserVO {
 	public void setOrderday(Date orderday) {
 		this.orderday = orderday;
 	}
-	public int getStatus() {
-		return status;
-	}
-	public void setStatus(int status) {
-		this.status = status;
-	}
-	
-	public UserVO(int user_no, String id, String pw, String name, String tel, String email, int subs, Date orderday,
-			int status) {
-		super();
-		this.user_no = user_no;
-		this.id = id;
-		this.pw = pw;
-		this.name = name;
-		this.tel = tel;
-		this.email = email;
-		this.subs = subs;
-		this.orderday = orderday;
-		this.status = status;
-	}
-	
-	public UserVO() {
-		super();
-	}
-	public Date getAdd_months() {
-		return add_months;
-	}
-	public void setAdd_months(Date add_months) {
-		this.add_months = add_months;
-	}
-	
-	
-	
-	
 }

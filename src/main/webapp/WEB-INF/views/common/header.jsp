@@ -1,14 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html>
 <link rel="stylesheet" href="css/header.css" />
 
 
-<script src="js/jquery-3.6.0.js"></script>
 <script type="text/javascript">
 function kaja(bada) {
    if(bada.style.display=="none"){
@@ -18,14 +16,12 @@ function kaja(bada) {
    }
 }
 </script>
-
-
 <body>
    <table align=center width=1500>
       <tr>
          <th align=left style="vertical-align: top;">
             <div id="logo">
-               <a href="mainpage" id="logo">KGFlix</a>
+               <a href="search" id="logo">KGFlix</a>
             </div>
          </th>
          <th align=right>
@@ -39,23 +35,20 @@ function kaja(bada) {
          </c:when>
          <c:otherwise> <!-- 유저정보 db출력 -->
             <table id="table_header">
-               <tr><th colspan="3"><font id="logo"><c:out value="${applicationScope.member.name}"></c:out></font>
+               <tr><th colspan="3"><font id="logo"><c:out value="${sessionScope.member.name}"></c:out></font>
                <font id="logo" style="color: white;"> 님 반갑습니다</font></th></tr>
-             <tr><th colspan="3"><font>기한: <c:if test="${member.subs == 0 }">미결제 회원입니다.</c:if>
-             <c:if test="${member.subs == 1 }"><fmt:formatDate  var="date2" value="${pvo.lastday}" type="DATE" pattern="yyyy-MM-dd"/>
-             ${date2}
-             </c:if> </font></th></tr> 
+               <tr><th colspan="3"><font>기간:2021.07.01~2021.08.01</font></th></tr>
                <tr><th>
-               <a href="/pay"><font id="div_btn">정액제신청</font></a></th>
+               <button><font id="div_btn">정액제신청</font></button></th>
                <th><button onclick="kaja(document.getElementById('menu'))"><font id="div_btn">마이페이지</font></button></th>
                <th><a href="logout"><font id="div_btn">로그아웃</font></a>
                </th></tr>
                <tr ><th colspan="3">
                        <div id="menu" style="display: none;" align="center">
              	<ul>
-                     <li><form action="myinfo"><input type="submit" value="내 정보 수정" id="btn1">
-                     <input type="hidden" id="member" value=${member }></form>
-                     <li><a href="/myFavoritesMain"><font>찜 목록 보기</font></a>
+                     <li><form action="myinfo" method="post"><input type="submit" value="내 정보 수정">
+                     <input type="hidden" id="member" value=${member }></form> 
+                     <li><a href="myvideopage"><font>찜 목록 보기</font></a>
                 </ul>
                </div>
                </th></tr>
@@ -67,7 +60,12 @@ function kaja(bada) {
          </th>
       </tr>
    </table>
-    
+    <div id="menu" style="display: none;" align=right>
+               <ul>
+                  <li><a href="#"><font>정보수정</font></a>
+                  <li><a href="#"><font>찜목록보기</font></a>
+               </ul>
+            </div>
 
 </body>
 </html>

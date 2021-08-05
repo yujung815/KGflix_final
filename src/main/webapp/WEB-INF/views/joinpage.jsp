@@ -14,13 +14,6 @@
 		var tel = f.tel.value;
 		var email = f.email.value;
 		var idCheck = f.idDuplication.value;
-		var regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-
-		if(email.match(regExp) == null){
-			alert('이메일을 확인해보세요');
-			f.email.focus();
-			return;
-		}
 		
 		if(id == ''){
 			alert('아이디를 입력해 주세요');
@@ -58,7 +51,6 @@
 			return;
 		}
 	
-		alert('정상가입이 완료 되었습니다.');
 		f.submit(); 
 		
 	}
@@ -68,7 +60,7 @@
 
 <script type="text/javascript">
 	function displayResult() {
-		var id = $('input[name=id]').val();
+		var id = $("#id").val();
 		if(id == ""){
 			alert('id를 입력해주세요!');
 			return;
@@ -103,53 +95,56 @@
     </header>
 <section>
 <article>
-<div align="center">
-	<div id="title">KGFlix 회원가입</div> <br />
+		<h2>KG 플릭스 회원가입</h2>
 	<form action="joinmember" method="post">
-		<table>
+		<table border="1">
 		<tr>
-			<td id="font1">아이디</td>
-			<td id="pd">
-				<input type="text" name="id"  placeholder="ID를 입력하세요" id="box">
+			<td>
+				<input type="text" name="id" id="id" placeholder="ID를 입력하세요">
+			</td>
+			<td>
 				<input type="button" id="checkbtn" onclick="displayResult();" value="중복확인">
 			</td>
-
-				
 		</tr> 
 		<tr>
-			<td id="font1">비밀번호</td>
-			<td id="pd"><input type="password" placeholder="PW를 입력하세요" name="pw" id="box"></td>
+			<td colspan="2">
+			<label>비밀번호</label><br>
+			<input type="password" placeholder="PW를 입력하세요" name="pw" > 
+			</td>
 		</tr>
 		<tr>
-			<td id="font1">비밀번호 확인</td>
-			<td id="pd"><input type="password" placeholder="Confirm Password" name="pw_con" id="box"></td>
+			<td colspan="2">
+				<label>비밀번호 확인</label><br>
+				<input type="password" placeholder="Confirm Password" name="pw_con">
+			</td>
 		</tr>
 		<tr>
-			<td id="font1">이름</td>
-			<td id="pd"><input type="text" name="name" placeholder="이름" id="box"></td>
+			<td colspan="2">
+				<label>이름</label><br>
+				<input type="text" name="name" placeholder="이름" >
+			</td>
 		</tr>
 		<tr>
-			<td id="font1">전화번호</td>
-			<td id="pd"><input type="text" name="tel"  placeholder="전화번호" id="box"></td>
-		</tr>
+			<td colspan="2">
+				<label>전화번호</label><br>
+				<input type="text" name="tel"  placeholder="전화번호">
+			</td>
 		<tr>
-			<td id="font1">이메일</td>
-			<td id="pd"><input type="email" name="email" placeholder="이메일" id="box"></td>
+		<tr><td colspan="2">
+				<label>이메일</label><br>
+				<input type="email" name="email" placeholder="이메일" ><br>
+				
+			</td>
 		</tr>
 		<tr>
 			<td colspan="2" align="center">
-				<br />
 				<input type="hidden" name="idDuplication" id="idDuplication" value="uncheked" />
-				<br /><button type="button" onclick="join(this.form);" id="btn1">가입하기</button>
+				<button type="button" onclick="join(this.form);" style="color: white;">가입하기</button>
 			</td>
 		</tr>
 		</table>
 	</form>
-	<br /><br /><br /><br />
-</div>
+
 </article>
 </section>
 </body>
-<footer>
-	<jsp:include page="common/footer.jsp" />
-</footer>

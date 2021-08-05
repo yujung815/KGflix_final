@@ -8,88 +8,36 @@ a{
 	text-decoration:none;
 	}
 	
-hr{
-	width:80%;
-}
-
-#title1{
-	color:gold;
-	font-size:40px;
-	font-weight: bold;
-}
-
-#title2{
-	color: gold;
+#font{
+	color: yellow;
 	font-size: 40px;
-	font-weight: bold;
-	text-align: left;
 }
-
-#font1{
-	color:white;
-	font-size:20px;
-	font-weight: bold; 
-}
-
-#font2{
-	color:#FFA500;
-	font-size:40px;
-}
-
-#pd{
-	padding:10px;
-}
-
-#pd2{
-	padding:5px;
-}
-
-#btn1{
-	background-color:#87CEEB;
-	font-size:20px;
-	width:70px;
-	height:40px;
-}
-
-#btn2{
-	background-color:#2E8B57;
-	color: white;
-	font-size:18px;
-}
-
-#textbox{
-	width: 250px;
-	height: 40px;
-	font-size:20px;
-}
-
-
-
-
 
 
 /* ad_main */
 #bigmenu1{
-	color:#66CDAA;
-	font-size:40px;
-	font-weight: bold;
+	color: yellow;
+	font-size: 40px;
 }
 
 #bigmenu2{
-	color:#66CDAA;
-	font-size:40px;
-	font-weight: bold;
+	color: yellow;
+	font-size: 40px;
 }
 
-
-
 /* ad_member */
+#mem_title{
+	color: yellow;
+	font-size: 40px;
+	text-align: left;
+}
+
 #member {
     border-collapse: collapse;    
     background-color: white;
-    border-color:black;
 	font-size: 20px;
-	text-align: center;
+	color: black;
+	padding: 5px;
 	}
 
 #mem_top {
@@ -97,21 +45,25 @@ hr{
 }
 
 
-
 /* ad_cs */
+#cs_title{
+	color: yellow;
+	font-size: 40px;
+	text-align: left;
+}
+
 #cs_table {
 	border-top: 1px solid #444444;
     border-collapse: collapse;
-    border-color:white;
 	font-size: 20px;
 	color: white;
 	background-color: black;
-	text-align: center;
-
+	
   }
   
 #cs_list{
-	border-bottom: 2px solid white;
+	border-bottom: 1px solid #444444;
+	padding: 10px;
   }
 
 #cs_top{
@@ -124,11 +76,30 @@ hr{
 }
   
 
+/* ad_videoDetail */
+#video_name{
+	color:white;
+	font-size:30px;
+}
+
+#white{
+	color:white;
+	font-size : 20px;
+}
+
+#textbox{
+	font-size : 20px;
+}
+
+#button2{
+	font-size:20px;
+	background-color: green;
+}
 
 /* ad_videoInsert */
 #checkbox{
-	width:20px;
-	height:20px;
+	color:white;
+	font-size:20px;
 }
 
 #combobox{
@@ -136,7 +107,9 @@ hr{
 	height: 30px;
 }
 
-
+#button3{
+	font-size:20px;
+}
 
 /* ad_videoSearch */
 #search_title{
@@ -147,11 +120,11 @@ hr{
 #search_textbox{
 	width:500px;
 	height: 50px;
-	font-size:20px;
+	font-size:30px;
 }
 
-#s_btn{
-	color:gold;
+#button4{
+	color:yellow;
 	font-size:30px;
 	background-color: black;
 }
@@ -165,18 +138,13 @@ hr{
 	font-size: 40px;
 }
 
-#s_table{
-	float:left;
-	padding:10px;
-}
-
 #type{
 	font-size:20px;
 }
 
 #thumb{
-	width:250px;
-	height:200px;
+	width:200px;
+	height:150px;
 }
 
 #video_name{
@@ -184,19 +152,12 @@ hr{
 	font-size:30px;
 }
 
-
-
-/* ad_videoDetail */
-#thumb2{
-	width:400px;
-	height:300px;
-}
-
-
 /* ad_videoUpdate */
 
 /* ad_cs */
-
+#cs_title{
+	color: black;
+}
 
 
 

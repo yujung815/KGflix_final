@@ -11,7 +11,8 @@
 	</insert>
 
 	<select id="list" resultType="com.company.kgflix.cs.vo.CsVO">
-		select *
+		select
+		*
 		from cs_table WHERE
 		user_no = #{user_no}
 		order by REGDATE DESC

@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="css/cs.css" />
 
 <header>
-	<jsp:include page="common/header.jsp" />
+	<jsp:include page="common/header.jsp" flush="true" />
 </header>
 
 
@@ -18,23 +18,17 @@
 <form action="updateinfo" method="post">
 <h1><span2>1:1 게시판 문의 내용 확인</span2></h1>
 
-<table border="1" id="cs_table">
-	<tr>
-		<th colspan=2 style="height:50px;" id="gray">문의 내용</th>
-	</tr>
-	<tr style="height:40px;">
-		<th id="gray">아이디</th>
-		<td>${vo.user_no}</td>
-	<tr>
-	<tr style="height:40px;">
-		<th id="gray">제목</th>
-		<td>${vo.cs_title}</td>
-	</tr>
-	<tr style="height:200px;">
-		<th id="gray">내용</th>
-		<td>${vo.cs_content}</td>
-	</tr>
+<table border="1" bgcolor="white"  bordercolor="black" width ="1000"  >
 
+	<tr><td>아이디</td><td>제목</td><td>문의 내용</td></tr>
+	
+	<tr>
+	<td>${vo.user_no}</td>
+	
+	<td>${vo.cs_title}</td>
+	
+	<td>${vo.cs_content}</td>
+	</tr>
 	
 
 </table>

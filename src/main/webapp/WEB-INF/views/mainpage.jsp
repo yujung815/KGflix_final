@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 
 <header>
     <jsp:include page="common/header.jsp"/>
@@ -19,9 +18,6 @@
 			 }
 			}
 	</script>
-	
-
-
 
 <link rel="stylesheet" href="css/main1.css" />
 
@@ -52,7 +48,7 @@
 		<br /><br /><br /></td></tr>
 <tr ><td style="text-align: center;"> 
 
-			<img src="img/main_img_1.jpg" width="400px" id="first"/>
+			<img src="img/main_img_1.jpg" width="400px"/>
 	</td>
 	<td>	
 			<div id="sub_text">다양하고 재미있는 콘텐츠!!</div>
@@ -69,7 +65,7 @@
 		<div style="text-align: center;" id="sub_text">
 			저렴한 가격의 갓성비!</div>
 			</td><td>
-		<div style="text-align: center;" id="second">
+		<div style="text-align: center;">
 			<div id="sub_text" style="color: red;">월 4900원으로</div>
 			<div id="sub_text" style="color: red;">모든 콘텐츠를 즐겨보세요!</div>
 		</div>
@@ -83,7 +79,7 @@
 
 	<tr ><td style="text-align: center;"> 
 
-			<img src="img/main_img_2.jpg" width="400px" id="third"/>
+			<img src="img/main_img_2.jpg" width="400px"/>
 	</td>
 	<td>	
 			<div id="sub_text">어린이를 위한 맞춤 컨텐츠!!</div>
@@ -103,14 +99,15 @@
 		</div>
 		<div>
 			<div id="sub_text">
-				<c:if test="${member == null }">
-					<a href="joinpage" style="color: red;">회원가입하러 가기</a>
-				</c:if>
+				<a href="joinpage" style="color: red;">회원가입하러 가기</a>
 			</div>
 		</div>
 	</article>
 
-	
+	<article>
+		<div></div>
+		<hr />
+	</article>
 </td></tr>
 </table>
 
