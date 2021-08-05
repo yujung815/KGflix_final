@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.company.kgflix.dao.UserDAO">
+	<!-- 전체출력 -->
+	<select id="allinfo" resultType="com.company.kgflix.vo.UserVO">
+		select * from user_table WHERE id NOT IN('root') order by user_no
+	</select>
+	
+	<!-- 이용정지 -->
+	<update id="updateStatus1">
+		update user_table set status = 1 where id = #{id}
+	</update>
+	<update id="updateStatus2">
+		update user_table set status = 0 where id = #{id}
+	</update>
+	
+	<!-- 유저삭제 -->
+	<delete id="deleteUser">
+		delete from user_table where id = #{id}
+	</delete>
+	
+</mapper>
+
+

@@ -1,170 +1,342 @@
 package com.kgflix.member;
 
-import java.lang.reflect.Member;
+import java.util.HashMap;
+import java.util.Map;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestAttribute;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttribute;
-import org.springframework.web.context.request.SessionScope;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.servlet.mvc.support.RedirectAttributesModelMap;
 
 import com.kgflix.member.dao.MemberDAO;
+import com.kgflix.member.dao.WishDAO;
+import com.kgflix.member.dao.payDAO;
 import com.kgflix.member.vo.MemberVO;
-
-import lombok.Cleanup;
-
+import com.kgflix.member.vo.login_searchVO;
+import com.kgflix.member.vo.payVO;
 
 @Controller
 public class MemberController {
+
 	@Autowired
 	MemberDAO dao;
-	 
 	
+	@Autowired
+	payDAO pdao;
+
+	@Autowired
+	HttpSession session;
+
+	@Autowired
+	ServletContext application;
+
+	@Autowired
+	HttpServletRequest req;
 	
+	@Autowired
+	WishDAO wdao;
 
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String strart(RedirectAttributes reAttr) {
-			
-		return "redirect:/main";
-	}// 시작과 동시에 메인페이지로 전환
+	@GetMapping("/")
+	public String mainpage() {
 
-	@RequestMapping(value = "/main", method = RequestMethod.GET)
-		public String mainpage(Model model) {
-			return "mainpage";
+		application = req.getServletContext();
+		if (application.getAttribute("lsvo") != null) {
+			application.removeAttribute("lsvo");
 		}
 
-	@RequestMapping(value="/mainpage", method=RequestMethod.GET)
+		return "mainpage";
+	}
+
+	@GetMapping("/mainpage")
 	public String mainPage() {
 		return "mainpage";
-		
+
 	}
-	@RequestMapping(value="/mainpage", method=RequestMethod.POST)
-	public String mainPage(@RequestParam ("member") MemberVO member,SessionAttribute session) {
-		
+
+	@PostMapping("/mainpage")
+	public String mainPage(@RequestParam("member") MemberVO member) {
+
 		return "mainpage";
-		
-	}
-		
-	@RequestMapping(value="/loginpage",method=RequestMethod.GET)
-		public String loginpage(Model model) {
-			model.addAttribute("loginmessage","");
-			
-			return "loginpage";
-		}
 
-	@RequestMapping("/logout")
-	public String logout(@SessionAttribute ("member") MemberVO member,WebRequest req) {
-		req.removeAttribute("member",WebRequest.SCOPE_SESSION); //session scope에 저장되어져 있는 member정보를 삭제
-		return "redirect:/main";
 	}
-	
-	
-	@RequestMapping(value="/login", method=RequestMethod.POST) 
-		 public String loginStart(@RequestParam ("id") String id, @RequestParam("pw") String pw ,HttpSession session) { 
-			MemberVO member=dao.login(id, pw); 
-				if (member!=null) {		
-					session.setAttribute("member",member); //객체 생성해서 넘겨줌.
-					return "redirect:/main";
-				}else {
-					session.setAttribute("loginfail","로그인 실패 비밀번호를 확인해주세요");
-			    	return "loginpage";
-			 	}
-		}
-	
 
-	@RequestMapping(value = "/joinpage", method = RequestMethod.GET)
+	@GetMapping("/loginpage")
+	public String loginpage(Model model) {
+		model.addAttribute("loginmessage", "");
+
+		return "loginpage";
+	}
+
+	@GetMapping("/logout")
+	public String logout(WebRequest wreq) {
+		application = req.getServletContext();
+		application.removeAttribute("member");
+		application.removeAttribute("pdao");
+		return "redirect:/";
+	}
+
+	@PostMapping("/login")
+	public String loginStart(String id, String pw, RedirectAttributes red) {
+
+
+		MemberVO member = null;
+
+		if (dao.login(id, pw) != null) {
+			member = dao.login(id, pw);
+			if (member.getId().equals("root")) {
+				return "move/move_admin";
+
+			} else if (dao.status(member.getId()) == 1) {
+				red.addFlashAttribute("msg", "stop");
+
+				return "redirect:/loginpage";
+
+			} else {
+				application.setAttribute("member", member); // 객체 생성해서 넘겨줌.
+				payVO pvo = pdao.getInfo(id);
+				application.setAttribute("pvo", pvo); 
+				return "redirect:/";
+			}
+		} else {
+			red.addFlashAttribute("msg","fail");
+			return "redirect:/loginpage";
+		}
+	}
+
+
+
+	@GetMapping("/joinpage")
 	public String joinStart(Model model1) {
 		model1.addAttribute("pwwarning", "비밀번호를 확인해주세요");
 		model1.addAttribute("emailwarning", "");
 		return "joinpage";
 	}
 
-	@RequestMapping(value = "/joinpage", method = RequestMethod.POST)
-	public String joinpage(Model model1) {
+	@PostMapping("/joinpage")
+	public String joinpage() {
 		return "joinpage";
 	}
 
-	@RequestMapping(value = "/joinmember", method = RequestMethod.POST)
-	public String joinmember(HttpServletRequest req, Model model1) {
-		/* MemberVO member= new MemberVO(); */
-		String  id=req.getParameter("id");
-		String pw=req.getParameter("pw");
-		String name=req.getParameter("name");
-		String tel=req.getParameter("tel");
-		String email=req.getParameter("email");
-		dao.insertMember(id,pw,name,tel,email);
-		return "redirect:/main";
+	@PostMapping("/joinmember")
+	public String joinmember(String id , String pw , String name , String tel ,String email) {
+		MemberVO mvo = new MemberVO(id,pw,name,tel,email);
+		dao.insertMember(mvo);
+		return "redirect:/mainpage";
 	}
-	
-	@RequestMapping(value = "/checkIdExist", method = RequestMethod.POST)
-	public String checkIdExist(Model model1, HttpServletRequest req) {
-		String memberid = req.getParameter("id");
-		MemberVO mvo = null;
-		mvo=dao.getMembInfo(memberid);
-		model1.addAttribute(mvo);
-		return "joinmember";
 
-		// 중복아이디체크
-	}
-	
-	@RequestMapping(value = "/findID")
+	@GetMapping("/findID")
 	public String findID() {
 		return "findID";// 아이디찾기 페이지
 	}
 
-	@RequestMapping(value = "/findPW")
+	@PostMapping("/findIdAtion")
+	@ResponseBody
+	public Map<String, Object> findIdAcrion(String name, String email) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		String id = dao.findId(name, email);
+
+		if (id != null) {
+			map.put("result", id);
+		} else {
+			map.put("result", "fail");
+		}
+
+		return map;
+	}
+
+	@GetMapping("/findPW")
 	public String findPW() {
 		return "findPW";
 		// 비번찾기 페이지
 	}
 
+	@PostMapping("/findPwAtion")
+	@ResponseBody
+	public Map<String, Object> findPwAtion(String name, String id, String email) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		String pw = dao.findPw(name, id, email);
 
-	@RequestMapping(value = "/myinfo", method = RequestMethod.POST)
-	public String myinfo(@SessionAttribute ("member") MemberVO member) {
-		
+		if (pw != null) {
+			map.put("result", pw);
+		} else {
+			map.put("result", "fail");
+		}
+
+		return map;
+	}
+
+	@GetMapping("/myinfo")
+	public String myinfo() {
+
 		return "myinfo";
 	}
 
-	
-	@RequestMapping("/updateMembInfo")
-	public String updateMembInfo(HttpServletRequest req,@SessionAttribute("member") MemberVO member) {
-		String pw=req.getParameter("newPW1");
-		String tel=req.getParameter("tel");
-		String email=req.getParameter("email");
-		member.setPw(pw);	
-		member.setTel(tel);
-		member.setEmail(email);
-		dao.updateMembInfo(member);
-		
+	@ResponseBody
+	@PostMapping("/checkId")
+	public Map<String, Object> checkId(String id) {
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		int check = dao.checkOverId(id);
+
+		if (check != 1) {
+			map.put("result", "suc");
+		} else {
+			map.put("result", "fail");
+		}
+
+		return map;
+	}
+
+	@PostMapping("/updateMembInfo")
+	public String updateMembInfo(String id , String newPW1 , String tel , String email) {
+		MemberVO mvo = new MemberVO(id, newPW1, tel, email);
+		dao.updateMembInfo(mvo);
+		application = req.getServletContext();
+		application.removeAttribute("member");
+		MemberVO mvo2 = dao.getMembInfo(id);
+		application.setAttribute("member", mvo2);
 		return "redirect:/myinfo";
 	}
-	
-	
 
-	@RequestMapping(value = "/orderpage", method = RequestMethod.GET)
+	@GetMapping("/orderpage")
 	public String orderpage() {
 		return "orderpage";
 
 	}
-	
-	@RequestMapping(value="/deleteMembInfo", method=RequestMethod.POST)
-	public String deleteMembInfo(HttpSession session) {
-		session.setAttribute("member",null);// 회원탈퇴를 한 후 로그인했던 정보를 삭제해 준다.
-		return "redirect:/main";//main화면으로 이동
+
+	@GetMapping("/deleteMembInfo")
+	public String deleteMembInfo() {
+		application = req.getServletContext();
+		MemberVO mvo = (MemberVO)application.getAttribute("member");
+		dao.deleteMembInfo(mvo.getId());
+		application.removeAttribute("member");
+		application.removeAttribute("pdao");
+		pdao.delete(mvo.getId());
+		wdao.delete(mvo.getId());
+		
+		return "redirect:/mainpage";// main화면으로 이동
 	}
-	
-	
+
+	@GetMapping("/search")
+	public String search() {
+
+		String searchItem = req.getParameter("searchItem");
+
+		application = req.getServletContext();
+
+		MemberVO mvo = (MemberVO) application.getAttribute("member");
+		login_searchVO lsvo = new login_searchVO(mvo, searchItem);
+		application.setAttribute("lsvo", lsvo);
+		return "move/move_search";
+	}
+
+	@GetMapping("/cs")
+	public String cs() {
+
+		return "move/move_cs";
+	}
+
+	@GetMapping("/close")
+	public void close() {
+		application = req.getServletContext();
+		application.removeAttribute("member");
+	}
+
+	@RequestMapping("/order")
+	public String orderPage() {
+
+		return "orderPage";
+	}
+
+	@RequestMapping(value = "/pay")
+	public String payPage(Model model , RedirectAttributes red) {
+		application = req.getServletContext();
+		MemberVO mvo =  (MemberVO) application.getAttribute("member");
+		model.addAttribute("id",mvo.getId());
+		model.addAttribute("price","4900");
+		if(pdao.getInfo(mvo.getId())!=null) {
+			return "move/alert";
+		}
+		return "payPage";
+	}
+
+	@RequestMapping(value = "/payFail")
+	public String payFail(Model model) {
+
+		model.addAttribute("msg", "결제 정보가 다릅니다.");
+		model.addAttribute("url", "order");
+
+		return "payFailPage";
+	}
+
+	@RequestMapping(value = "/subsPayFail")
+	public String subsPayFail(Model model) {
+
+		model.addAttribute("msg", "이미 결제가 완료된 회원입니다.");
+		model.addAttribute("url", "mainpage");
+
+		return "payFailPage";
+	}
+
+	@RequestMapping(value = "/managerPayFail")
+	public String managerPayFail(Model model) {
+
+		model.addAttribute("msg", "안녕하세요 관리자님");
+		model.addAttribute("url", "mainpage");
+
+		return "payFailPage";
+	}
+
+	@RequestMapping(value = "/paySuccess")
+	public String paySuccess(HttpServletRequest request, Model model) {
+		application = req.getServletContext();
+		MemberVO mvo =  (MemberVO) application.getAttribute("member");
+		dao.changeSubs(mvo.getId());
+		pdao.insert(mvo.getId());
+		
+		application.removeAttribute("member");
+		application.removeAttribute("pvo");
+		
+		MemberVO member = dao.getMembInfo(mvo.getId());
+		application.setAttribute("member", member); // 객체 생성해서 넘겨줌.
+		payVO pvo = pdao.getInfo(mvo.getId());
+		application.setAttribute("pvo", pvo); 
+
+		model.addAttribute("msg", "결제가 완료되었습니다.");
+		model.addAttribute("url", "return");
+
+		return "paySuccessPage";
+	}
+
+	@RequestMapping(value = "/return")
+	public String returnMainPage() {
+
+		return "redirect:/";
+	}
+
+	@RequestMapping(value = "/myFavoritesMain")
+	public String favoritesMain(RedirectAttributes redirect, HttpServletRequest request) {
+		String redirectUrl = request.getScheme() + "://localhost:8766/loginFavoritesMain";
+		application = req.getServletContext();
+		MemberVO mvo = (MemberVO)application.getAttribute("member");
+			
+		redirect.addAttribute("userId", mvo.getId());
+
+		return "redirect:" + redirectUrl;
+
+	}
 
 }

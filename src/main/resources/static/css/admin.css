@@ -1,0 +1,204 @@
+@charset "UTF-8";
+
+body {
+	background-color: black;
+}
+
+a{
+	text-decoration:none;
+	}
+	
+hr{
+	width:80%;
+}
+
+#title1{
+	color:gold;
+	font-size:40px;
+	font-weight: bold;
+}
+
+#title2{
+	color: gold;
+	font-size: 40px;
+	font-weight: bold;
+	text-align: left;
+}
+
+#font1{
+	color:white;
+	font-size:20px;
+	font-weight: bold; 
+}
+
+#font2{
+	color:#FFA500;
+	font-size:40px;
+}
+
+#pd{
+	padding:10px;
+}
+
+#pd2{
+	padding:5px;
+}
+
+#btn1{
+	background-color:#87CEEB;
+	font-size:20px;
+	width:70px;
+	height:40px;
+}
+
+#btn2{
+	background-color:#2E8B57;
+	color: white;
+	font-size:18px;
+}
+
+#textbox{
+	width: 250px;
+	height: 40px;
+	font-size:20px;
+}
+
+
+
+
+
+
+/* ad_main */
+#bigmenu1{
+	color:#66CDAA;
+	font-size:40px;
+	font-weight: bold;
+}
+
+#bigmenu2{
+	color:#66CDAA;
+	font-size:40px;
+	font-weight: bold;
+}
+
+
+
+/* ad_member */
+#member {
+    border-collapse: collapse;    
+    background-color: white;
+    border-color:black;
+	font-size: 20px;
+	text-align: center;
+	}
+
+#mem_top {
+    background-color: #d3d3d3;
+}
+
+
+
+/* ad_cs */
+#cs_table {
+	border-top: 1px solid #444444;
+    border-collapse: collapse;
+    border-color:white;
+	font-size: 20px;
+	color: white;
+	background-color: black;
+	text-align: center;
+
+  }
+  
+#cs_list{
+	border-bottom: 2px solid white;
+  }
+
+#cs_top{
+	background-color: white;
+	color:black;
+}
+
+#cs_a{
+	color:white;
+}
+  
+
+
+/* ad_videoInsert */
+#checkbox{
+	width:20px;
+	height:20px;
+}
+
+#combobox{
+	font-size:20px;
+	height: 30px;
+}
+
+
+
+/* ad_videoSearch */
+#search_title{
+	color:white;
+	font-size:40px;
+}
+
+#search_textbox{
+	width:500px;
+	height: 50px;
+	font-size:20px;
+}
+
+#s_btn{
+	color:gold;
+	font-size:30px;
+	background-color: black;
+}
+
+#search_result{
+	vertical-align : top;
+}
+
+#name{
+	color: orange;
+	font-size: 40px;
+}
+
+#s_table{
+	float:left;
+	padding:10px;
+}
+
+#type{
+	font-size:20px;
+}
+
+#thumb{
+	width:250px;
+	height:200px;
+}
+
+#video_name{
+	color:white;
+	font-size:30px;
+}
+
+
+
+/* ad_videoDetail */
+#thumb2{
+	width:400px;
+	height:300px;
+}
+
+
+/* ad_videoUpdate */
+
+/* ad_cs */
+
+
+
+
+
+

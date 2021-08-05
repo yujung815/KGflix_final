@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kgflix.member.dao.payDAO">
+
+	<select  id="getInfo" resultType="com.kgflix.member.vo.payVO">
+		SELECT * FROM pay WHERE id=#{id}
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO pay(id) VALUES(#{id})
+	</insert>
+	
+	<update id="update">
+		UPDATE pay SET lastday=#{lastday} WHERE id=#{id}
+	</update>
+	
+	<delete id="delete">
+		DELETE FROM pay WHERE id=#{id}
+	</delete>
+
+
+</mapper>

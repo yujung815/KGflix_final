@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.kgflix.dao.FavoritesFreeDAO">
+
+<select id ="getFree" resultType="com.company.kgflix.vo.FavoritesFreeVO">
+SELECT free, con_no
+FROM content_table
+WHERE con_no = #{NumCon_no}
+</select>
+
+</mapper>

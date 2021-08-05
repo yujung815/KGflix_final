@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.company.kgflix.dao.CommentDAO">
+	<select id="search_content" resultType="com.company.kgflix.vo.CommentVO">
+		SELECT * FROM comment_table WHERE con_no=#{con_no} ORDER BY uptime
+	</select>
+	
+	<delete id="delete_comment">
+		DELETE FROM comment_table WHERE con_no=#{con_no} AND id=#{id}
+	</delete>
+	
+	<insert id="regist_comment" >
+		INSERT INTO comment_table(con_no,id,comment_user,score) VALUES(#{con_no},#{id},#{comment_user},#{score})
+	</insert>
+	
+	<select id="score_avg" resultType="string">
+		SELECT AVG(score) FROM comment_table WHERE con_no = #{con_no}
+	</select>
+</mapper>

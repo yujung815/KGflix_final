@@ -1,72 +1,57 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<style>
+    pageEncoding="UTF-8"%> 
 
-h2{
-	
-	text-align:center;	
-	color:white;
-	style:bold;
-}
 
-div{
-	
-	padding-top:5%;
-	padding-bottom:5%;
-	
-}
- table{
- 	text-align:center;
-	margin-left:20%;
-	width:60%;
-	height:75%;
-}
-tr{
-	width:100%;
-	height:100%;
-	color:white;
-}
-td{
-	padding:5px;
-	
-}
-a{
-	color:red;
-}
-input{
-	padding :auto;
-}
-
-</style>
-<meta charset="UTF-8">
 <title>Insert title here</title>
-</head>
+<link rel="stylesheet" href="css/main.css" />
+<link rel="stylesheet" href="css/login.css" />
+
+<script type="text/javascript">
+       var check  = '${msg}';
+       if(check == 'stop'){
+    	   alert('이용정지된 아이디입니다. 고객센터에 문의 바랍니다');
+       }
+       if(check == 'fail'){
+    	   alert('아이디 혹은 비밀번호가 틀립니다.');
+       }
+</script>
+
+
 <body>
-	<header>
-        <jsp:include page="common/header.jsp"/>
-    </header>
+<header>
+	<jsp:include page="common/header.jsp"/>
+</header>
     <section>
     <article>
-			<h2>KG플릭스 로그인</h2>
-    <div class="container">
-	<form action="/login" method="post">
-		<table border="1">
-			<tr><td><input type="text" name="id" placeholder="아이디를 입력하세요" required></td>
-					<td></td></tr>
-			<tr><td><input type="text" name="pw" placeholder="비밀번호를 입력하세요" required ></td>
-					<td><input type="submit" value="로그인"></td></tr>
-		</table>
-	</form>
-		<table>
-			<tr><td>${loginfail}</td></tr>
-			<tr><td>아직 KG플릭스 가족이 아니신가요?<a href="/joinpage">회원가입하기</a></td></tr>
-			<tr><td><a href="/findID">아이디 찾기</a>|<a href="/findPW">비밀번호 찾기</a></td></tr>
-		</table>
-	</div>
+		<div id="title" align=center>KGFlix 로그인</div>
+		<br /><br />
+		<form action="/login" method="post">
+			<table align=center>
+				<tr>
+				 	<td id="font1">아이디</td>
+					<td id="pd"><input type="text" name="id" placeholder="아이디를 입력하세요" required id="box"></td>
+				</tr>
+				<tr>
+					<td id="font1">비밀번호</td>
+					<td id="pd"><input type="password" name="pw" placeholder="비밀번호를 입력하세요" required id="box"></td>
+				</tr>
+				<tr><td colspan=2 style="text-align: center;">
+					<br /><input type="submit" value="로그인" id="btn1"> <br /><br />
+				</td></tr>
+			</table>
+			<br /><br />
+			<table align=center>		
+				<tr><td colspan=2>
+					<font id="font1">아직 KG플릭스 가족이 아니신가요?</font> &nbsp;<a href="/joinpage" id="font3">회원가입</a> <br /><br />
+					<font id="font1">아이디가 기억 안나시나요?</font> &nbsp;<a href="/findID" id="font4">아이디 찾기</a> <br /><br />
+					<font id="font1">비밀번호가 기억 안나시나요?</font> &nbsp;<a href="/findPW" id="font5">비밀번호 찾기</a>
+				</td></tr>
+			</table>
+		</form>
+<br /><br /><br /><br /><br /><br /><br /><br /><br />
 	 </article>
     </section>
 </body>
-</html>
+<footer>
+	<jsp:include page="common/footer.jsp" />
+</footer>

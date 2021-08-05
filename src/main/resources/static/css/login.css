@@ -1,0 +1,60 @@
+@charset "UTF-8";
+
+#title{
+	color:gold;
+	font-size:40px;
+	font-weight: bold;
+}
+#loginfail{
+	color:red;
+}
+
+#box{
+	width: 250px;
+	height: 40px;
+	font-size:20px;
+}
+
+#pd{
+	padding:10px;
+}
+
+#font1{
+	font-size:20px;
+	color:white;
+	padding:10px;
+}
+
+#font3{
+	color:#DC143C;
+	font-size:20px;
+}
+#font4{
+	color:#48D1CC;	
+	font-size:20px;
+}
+#font5{
+	color:#3CB371;
+	font-size:20px;
+}
+#font6{
+	color:orange;
+}
+#font7{
+	color: silver;
+	font-size: 40px;
+}
+
+#btn1{
+	background-color:#87CEEB;
+	font-size:20px;
+	width: 100px;
+	height: 40px;
+}
+
+#checkbtn{
+	background-color:white;
+	font-size:18px;
+	width: 90px;
+	height: 30px;
+}

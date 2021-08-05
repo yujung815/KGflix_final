@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.kgflix.dao.ContentDAO">
+
+	<select id="getSearchInfo" resultType="com.company.kgflix.vo.ContentVO">
+		SELECT * FROM content_table WHERE title LIKE '%'||#{title_category}||'%'
+	</select> 
+	
+	<select id="getAllInfo" resultType="com.company.kgflix.vo.ContentVO">
+		SELECT * FROM content_table
+	</select>
+	
+	<select id="getInfo" resultType="com.company.kgflix.vo.ContentVO" parameterType="String">
+		SELECT * FROM content_table WHERE con_no=#{con_no}
+	</select>
+	
+	<!-- 전체출력 -->
+   <select id="Ad_videoSearch" resultType="com.company.kgflix.vo.ContentVO">
+      SELECT * FROM content_table
+   </select>
+	
+	<select id="getInfo_no" resultType="com.company.kgflix.vo.ContentVO">
+		SELECT * FROM content_table WHERE con_no=#{con_no}
+	</select>
+
+	<update id="updateInfo">
+		UPDATE content_table SET title=#{title}, category=#{category}, new_no=#{new_no}, pop=#{pop}, free=#{free}
+		WHERE con_no = #{con_no}
+	</update>
+	
+	<delete id="deleteContent">
+      delete from content_table where con_no = #{con_no}
+   </delete>
+	
+	<insert id="insertInfo">
+		INSERT INTO content_table VALUES(con_seq.nextval , #{title} , 
+		#{category} , #{new_no} , #{pop}  ,#{free} , #{videoPath} , #{thumbPath})
+	</insert>
+	
+	<select id="Search_cate" resultType="com.company.kgflix.vo.ContentVO">
+      SELECT * FROM content_table where category = #{category}
+   </select>
+	
+	
+</mapper>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.kgflix.dao.FavoritesDAO">
+
+<!-- <select id="login" resultType="com.company.kgflix.vo.FavoritesVO">
+	SELECT * FROM user_table
+	where id = #{id}
+</select> -->
+
+
+<insert id="insertFavorites">
+
+
+INSERT INTO wish_table(user_id, con_no)
+	SELECT #{userId}, #{videoCon_no} FROM DUAL
+	WHERE NOT EXISTS
+	(SELECT user_id, con_no FROM wish_table
+	WHERE user_id = #{userId} AND con_no = #{videoCon_no})
+</insert>
+
+<select id="getAllInfo" resultType="com.company.kgflix.vo.FavoritesVO">
+SELECT A.user_id , B.id, B.subs , A.con_no ,C.con_no, C.video_uri, C.thumb_uri, C.title, C.free
+FROM wish_table A 
+LEFT JOIN user_table B
+ON A.user_id = B.id
+RIGHT JOIN content_table C
+ON C.con_no = A.con_no
+WHERE A.user_id = #{userId}
+</select>
+
+<delete id="deleteFavorites">
+DELETE FROM wish_table WHERE user_id = #{userId} AND con_no = #{deleteCon_no}
+</delete>
+
+</mapper>
