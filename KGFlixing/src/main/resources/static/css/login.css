@@ -1,0 +1,71 @@
+@charset "UTF-8";
+
+#title{
+	color:gold;
+	font-size:40px;
+	font-weight: bold;
+}
+#loginfail{
+	color:red;
+}
+
+#box{
+	width: 250px;
+	height: 40px;
+	font-size:20px;
+}
+
+#pd{
+	padding:10px;
+}
+
+#font1{
+	font-size:20px;
+	color:white;
+	padding:10px;
+}
+
+#font3{
+	color:#DC143C;
+	font-size:20px;
+}
+#font4{
+	color:#48D1CC;	
+	font-size:20px;
+}
+#font5{
+	color:#3CB371;
+	font-size:20px;
+}
+#font6{
+	color:orange;
+}
+
+#btn1{
+	background-color:#87CEEB;
+	font-size:20px;
+	width: 100px;
+	height: 40px;
+}
+
+h2{
+	color:white;
+}
+table{
+	width:60%;
+	height:80%;
+}
+td{
+	padding:3px;
+	margin-left:1px;
+}
+label{
+	color:white;
+}
+.button1{
+	background-color:white;
+	color:black;
+	text-align:center;
+	display:inline-block;
+	font-size:80%;
+}
