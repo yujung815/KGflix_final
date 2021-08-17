@@ -2,11 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kgflix.member.dao.MemberDAO">
 
-
-
-
 	<select id="login" resultType="com.kgflix.member.vo.MemberVO">
-		select *
+		select user_no,id,pw,name,tel,email,subs,status
 		from user_table
 		where id=#{id} and pw=#{pw}
 	</select>
@@ -18,8 +15,20 @@
 		WHERE id=#{id}
 	</select>
 	
+	<select id="findId" resultType="String" parameterType="String">
+		SELECT id FROM user_table WHERE name=#{name} AND email=#{email}
+	</select>
+	
+	<select id="findPw" resultType="String" parameterType="String">
+		SELECT pw FROM user_table WHERE name=#{name} AND id=#{id} AND email=#{email}
+	</select>
+	
 	<select id="checkOverId" resultType="int">
 		SELECT count(*) FROM user_table WHERE id=#{user_id}
+	</select>
+	
+	<select id="status" resultType="int">
+		SELECT status FROM user_table WHERE id=#{id}
 	</select>
 
 	<insert id="insertMember" parameterType="com.kgflix.member.vo.MemberVO">
@@ -29,15 +38,30 @@
 
 	<update id="updateMembInfo">
 		UPDATE user_table
-		SET pw=#{pw}, tel=#{tel}
+		SET pw=#{pw}, tel=#{tel} , email=#{email}
 		WHERE id=#{id}
 	</update>
 
 	<delete id="deleteMembInfo" parameterType="String">
-		DELETE *
+		DELETE
 		FROM user_table
 		WHERE id=#{id}
 	</delete>
+	
+
+	
+	
+	<update id = "changeSubs" >
+		UPDATE user_table 
+		SET subs=1
+		WHERE id= #{id}
+	</update>	
+	
+	
+	
+	
+	
+	
 
 
 

@@ -7,7 +7,7 @@ header{
 
 
 #logo {
-	color: yellow;
+	color: gold;
 	font-size: 40px;
 	text-align: left;
 	text-decoration: none;
@@ -17,6 +17,7 @@ header{
 	font-size:20px;
 	text-align: right;
 	color: red;
+	font-weight:bold;
 }
 
 body {
@@ -40,5 +41,11 @@ font{
 }
 a{
 	text-decoration: none;
-
+}
+#btn1{
+	background-color: black;
+	color: white;	
+	font-weight:bold;
+	border: none;
+	font-size:16px;
 }

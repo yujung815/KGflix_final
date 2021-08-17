@@ -1,0 +1,40 @@
+@charset "UTF-8";
+
+#logo {
+	color: gold;
+	font-size: 40px;
+	text-align: left;
+	text-decoration: none;
+}
+
+#div_btn{
+	text-align: right;
+	color: red;
+}
+
+body {
+	background-color: black;
+}
+
+button{
+	background-color: black;
+	border: 0;
+	outline: 0;
+	font-size: 20px;
+}
+#table_header{
+	float: right;
+	text-align: center;
+ 	margin-right: 5%; 
+}
+
+font{
+	color: white;	
+}
+#btn1{
+	background-color: black;
+	color: white;	
+	font-weight:bold;
+	border: none;
+	font-size:16px;
+}

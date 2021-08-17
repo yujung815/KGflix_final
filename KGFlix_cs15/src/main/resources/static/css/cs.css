@@ -1,0 +1,151 @@
+@charset "UTF-8";
+
+input[id*="answer"]{
+   display:none;
+}
+input[id*="answer"]+label{
+   display:block;
+   padding:20px;
+   /* border:1px solid WHITE; */
+   border-bottom:0;
+   color:gold;
+   font-weight:900;
+   background:BLACK;
+   cursor:pointer;
+   
+}
+   input[id*="answer"]+label+div{
+   max-height:0;
+   transition:all .35s;
+   overflow:hidden;
+   color:white;
+   background:black;
+   font-size:16px;
+   
+   }
+   
+   input[id*="answer"]+label+div p{
+   display:inline-block;
+   padding:25px;
+   }
+   
+   input[id*="answer"]:checked+label+div{max-height:100px;}
+
+a{
+   text-decoration: none;
+}
+
+#span1{
+color:gold;
+}
+#span2{
+color:white;
+}
+#span3{
+color:#008C8C;
+}
+#span4{
+color:red;
+}
+.main_text1 {
+   border-bottom: 1px solid #e0e0e0;
+   text-align: center;
+   font-size: 20px;
+   color:gold;
+}
+.main_text2 {
+   border-bottom: 1px solid #e0e0e0;
+   text-align: center;
+   font-size: 15px;
+   color: red;
+}
+
+.main_text3 {
+   border-bottom: 1px solid #e0e0e0;
+   text-align: center;
+   font-size: 12px;
+   color: white;
+}
+.button {
+
+  background-color:#87CEEB;
+
+  border: none;
+
+  color: black;
+
+  padding: 10px 20px;
+
+  text-align: center;
+
+  text-decoration: none;
+
+  display: inline-block;
+
+  font-size: 16px;
+
+  margin: 4px 2px;
+
+  cursor: pointer;
+  
+  font-weight:bold;
+
+}
+
+
+#title{
+	color:gold;
+	font-size:40px;
+	font-weight:bold;
+	text-align:center;
+}
+
+#cs_title{
+	color: gold;
+	font-size: 40px;
+	font-weight: bold; 
+}
+
+#email{
+	color:white;
+	font-size: 25px;
+}
+
+#insert{
+	width: 600px; 
+	color:white;
+} 
+
+#box{
+	width:400px;
+	height:40px;
+}
+
+#box2{
+	width:400px;
+	height:40px;
+}
+
+#box3{
+	width:400px;
+	height:300px;
+}
+
+#pd{
+	padding:10px;
+	text-align:left;
+}
+
+/* list.jsp */
+#cs_table{	
+	border-collapse: collapse;    
+    background-color: white;
+    border-color:black;
+	font-size: 20px;
+	text-align: center;
+	width:1000px;
+}
+
+#gray{
+	background-color: #d3d3d3;
+}

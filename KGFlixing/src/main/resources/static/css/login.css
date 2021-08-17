@@ -40,6 +40,10 @@
 #font6{
 	color:orange;
 }
+#font7{
+	color: silver;
+	font-size: 40px;
+}
 
 #btn1{
 	background-color:#87CEEB;
@@ -48,24 +52,9 @@
 	height: 40px;
 }
 
-h2{
-	color:white;
-}
-table{
-	width:60%;
-	height:80%;
-}
-td{
-	padding:3px;
-	margin-left:1px;
-}
-label{
-	color:white;
-}
-.button1{
+#checkbtn{
 	background-color:white;
-	color:black;
-	text-align:center;
-	display:inline-block;
-	font-size:80%;
+	font-size:18px;
+	width: 90px;
+	height: 30px;
 }
