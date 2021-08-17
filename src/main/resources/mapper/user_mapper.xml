@@ -3,13 +3,16 @@
 
 <mapper namespace="com.company.kgflix.dao.UserDAO">
 	<!-- 전체출력 -->
-	<select id="Ad_member" resultType="com.company.kgflix.vo.UserVO">
-		select * from user_table order by user_no
+	<select id="allinfo" resultType="com.company.kgflix.vo.UserVO">
+		select * from user_table WHERE id NOT IN('root') order by user_no
 	</select>
 	
 	<!-- 이용정지 -->
-	<update id="updateSubs">
-		update user_table set subs = 2 where id = #{id}
+	<update id="updateStatus1">
+		update user_table set status = 1 where id = #{id}
+	</update>
+	<update id="updateStatus2">
+		update user_table set status = 0 where id = #{id}
 	</update>
 	
 	<!-- 유저삭제 -->

@@ -10,8 +10,8 @@
 		SELECT * FROM content_table
 	</select>
 	
-	<select id="getInfo" resultType="com.company.kgflix.vo.ContentVO">
-		SELECT * FROM content_table WHERE title=#{title}
+	<select id="getInfo" resultType="com.company.kgflix.vo.ContentVO" parameterType="String">
+		SELECT * FROM content_table WHERE con_no=#{con_no}
 	</select>
 	
 	<!-- 전체출력 -->
@@ -24,13 +24,12 @@
 	</select>
 
 	<update id="updateInfo">
-		UPDATE content_table SET title=#{title} , category=#{category} 
-		, new=#{new_no} , pop=#{pop} , free=#{free} , video_uri=#{video_uri} , thumb_uri=#{thumb_uri}
-		WHERE title=#{title}
+		UPDATE content_table SET title=#{title}, category=#{category}, new_no=#{new_no}, pop=#{pop}, free=#{free}
+		WHERE con_no = #{con_no}
 	</update>
 	
 	<delete id="deleteContent">
-      delete from content_table where title = #{title}
+      delete from content_table where con_no = #{con_no}
    </delete>
 	
 	<insert id="insertInfo">

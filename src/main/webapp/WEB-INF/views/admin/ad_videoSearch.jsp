@@ -1,65 +1,59 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%> 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
-
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
 <title>영상수정/삭제</title>
 <link rel="stylesheet" href="css/admin.css" />
-
-<script type="text/javascript">
-	function check(input) {
-		if(input.searchItem.value.length < 2){
-			alert('검색어를 2글자 이상 입력해주세요');
-		}else{
-			input.submit();
-		}
-	}
-</script>
+</head>
 
 <body>
 	<header><jsp:include page="../common/ad_header.jsp"/></header>
 	<section>
 	<article>
 		<div align=center>
-			<br />
-			<div id="search_title">수정하실 컨텐츠를 검색</div> <br />
-			<form action="/search2" name="input">
+			<br /><br />
+			<div id="search_title">수정하실 컨텐츠를 검색하세요</div> <br />
+			<form action="/search2">
 				<input type="text" name="searchItem" placeholder="제목 / 카테고리를 입력해주세요" id="search_textbox" /> 
-				<input type="button" value="검색" id="button4" onclick="check(input);"/>
+				<input type="submit" value="검색" id="s_btn"/>
 			</form>
 			<br />
 			<hr />
 		</div>
-		<table align="left" style="width: 20%; border: 0;">
+		<table align=center width="1410">
 			<tr>
-				<td width="1300">
+				<td>
 					<c:forEach var="search" items="${ad_videoSearch}">
-						<table style="float:left;">
+						<table id="s_table">
 							<tr id="type">
-								<td width="50">${search.category}</td>
-								<td width="50">
+								<td width="70" style="color:#3CB371;">${search.category}</td>
+								<td width="50" style="color:#DC143C">
 									<c:choose>
 										<c:when test="${search.free == 1}">
-											<font style="color: red">무료</font>
+											<font>무료</font>
 										</c:when>
 										<c:otherwise>
-										 	<font style="color: red">유료</font>
+										 	<font>유료</font>
 										</c:otherwise>
 									</c:choose>
 								</td >
 								<td width="50">
 									<c:if test="${search.new_no == 1}">
-										<font style="color: blue;">신작</font>
+										<font style="color: gold;">신작</font>
 									</c:if>
 								</td>
 								<td width="50">
 									<c:if test="${search.pop == 1 }">
-										<font style="color: green;">인기</font>
+										<font style="color:#00CED1;">인기</font>
 									</c:if>
 								</td>
 							</tr>
-							<tr onclick="location.href='ad_detail?title=${search.title}'">
+							<tr onclick="location.href='ad_detail?con_no=${search.con_no}'">
 								<td colspan=4>
-									<img src="${search.thumb_uri}" id="thumb" style="width: 100%"/> <br />
+									<img src="${search.thumb_uri}" id="thumb"/> <br />
 									<div id="video_name">${search.title}</div>
 								</td>
 							</tr>
@@ -73,3 +67,4 @@
 	</section>
 
 </body>
+</html>

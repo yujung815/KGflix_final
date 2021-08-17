@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html> 
+<!DOCTYPE html>  
 <html>
 <head>
 <meta charset="EUC-KR">
@@ -14,20 +14,20 @@
 	<article>
 		<br />
 		<table align=center>
-			<tr><th id="cs_title">1:1 문의관리</th></tr>
+			<tr><th id="title2">1:1 문의관리</th></tr>
 			<tr height=50></tr>
-			<tr><th>
+			<tr><td>
 				<table width=1200 id="cs_table">
 					<tr id="cs_top">
-						<td  width=300>No.</td>
-						<td width=600>title</td>
-						<td width=300 colspan="2">status</td>
+						<th width=300 id="pd">No.</th>
+						<th width=600 id="pd">title</th>
+						<th width=300 colspan="2" id="pd">status</th>
 					</tr>
 					<c:forEach var="cs" items="${ad_cs}">
 					<tr id="cs_list">
-						<th>${cs.cs_no}</th>
-						<th><a href="void(0);" onclick="alert('이메일 : ${cs.e_mail} \n\n${cs.cs_content}'); return false;" id="cs_a">${cs.cs_title}</a></th>
-						<th width=120 align=center>
+						<td>${cs.cs_no}</td>
+						<td><a href="void(0);" onclick="alert('이메일 : ${cs.e_mail} \n\n${cs.cs_content}'); return false;" id="cs_a">${cs.cs_title}</a></td>
+						<td width=120 align=center>
 							<c:choose>
 							<c:when test="${cs.status != 0}">
 								<div>완료</div>
@@ -36,12 +36,12 @@
 								<div>미처리</div>
 							</c:otherwise>
 						</c:choose>
-						</th>
-						<th align=center><button type="button" onclick="location.href='cs_status?cs_no=${cs.cs_no}'" id="button2">완료</button></th>
+						</td>
+						<td align=center id="pd"><button type="button" onclick="location.href='cs_status?cs_no=${cs.cs_no}'" id="btn2">완료</button></td>
 					</tr>
 					</c:forEach>
 				</table>
-			</th></tr>
+			</td></tr>
 		</table>
 	</article>
 	</section>

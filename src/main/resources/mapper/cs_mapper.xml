@@ -4,7 +4,7 @@
 <mapper namespace="com.company.kgflix.dao.CsDAO">
 	<!-- 전체출력 -->
 	<select id="Ad_cs" resultType="com.company.kgflix.vo.CsVO">
-		select * from cs_table order by cs_no
+		select cs_no,cs_title,e_mail,cs_content,status,REGDATE from cs_table order by cs_no DESC
 	</select>
 	
 	<!-- 처리상태 변경 -->

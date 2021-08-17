@@ -4,6 +4,7 @@
 
 <link rel="stylesheet" href="css/main.css" />
 
+
 	<header>
 		<jsp:include page="../common/header.jsp" />
 	</header>
@@ -24,9 +25,9 @@
 				</c:choose>
 				<table style="margin-left: auto; margin-right: auto;">
 					<tr>
-						<th><a href="/play?title='${cvo.title}'"><button id="btn">바로시청</button></a></th>
-						<th><a href="#"><button id="btn">찜하기</button></a></th>
-						<th><a href="#"><button id="btn">목록돌아가기</button></a>	</th>
+						<th><a href="/play?con_no=${cvo.con_no}"><button id="btn">바로시청</button></a></th>
+						<th><a href="/favorites?con_no=${cvo.con_no}"><button id="btn">찜하기</button></a></th>
+						<th><a href="javascript:history.go(-1);"><button id="btn">목록돌아가기</button></a>	</th>
 					</tr>
 				</table>	
 			</div>

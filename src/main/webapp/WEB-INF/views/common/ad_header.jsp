@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%> 
 <!DOCTYPE html> 
 <html>
 <head>
@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 <style>
 #logo {
-	color: yellow;
+	color: gold;
 	font-size: 40px;
 	text-align: left;
 	text-decoration: none;
@@ -25,7 +25,6 @@
 
 body {
 	background-color: black;
-	color: yellow;
 	font-size: 40px;
 }
 </style>
@@ -36,7 +35,7 @@ body {
 		<tr>
 			<th style="width: 1000px;">
 				<div id="logo">
-					<a href="/" id="logo">KG플릭스</a>
+					<a href="/" id="logo">KGFlix</a>
 				</div>
 			</th>
 			<th style="width: 500px">
@@ -45,7 +44,7 @@ body {
 		</tr>
 		<tr align=right>
 			
-			<th colspan="2" align=right><button oneclick="#" id="button1">로그아웃</button></th>
+			<th colspan="2" align=right><a href="http://localhost:8763">로그아웃</a></th>
 			
 		</tr>
 	</table>

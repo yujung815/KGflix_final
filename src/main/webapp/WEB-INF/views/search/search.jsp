@@ -11,6 +11,18 @@
 	
 </header>
 
+<script type="text/javascript">
+	var check = '${msg}';
+	if(check == 'case1'){
+		alert('로그인후 사용 가능한 컨텐츠 입니다');
+		history.go(-1);
+	}
+	if( check == 'case2'){
+		alert('유료 컨텐츠는 구독권 구매후 사용 가능합니다');
+		history.go(-1);
+	}
+</script>
+
 <section>
 	<article>
 		<div id="main_text">
@@ -83,8 +95,11 @@
 									</td>
 								</tr>
 								<tr>
-									<td colspan="4"><a href="/detailPage?title='${search.title}'"> 
-									<img src="${search.thumb_uri}" id="thumb" /></a></td>
+									<td colspan="4">
+										<a href="/detailPage?con_no=${search.con_no}&searchItem=${searchItem}"> 
+											<img src="${search.thumb_uri}" id="thumb" />
+										</a>
+									</td>
 								</tr>
 								<tr>
 									<td colspan="4" id="video_name"><font>${search.title}</font>

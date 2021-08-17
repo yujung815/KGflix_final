@@ -20,18 +20,105 @@ hr {
 	width: 80%;
 }
 
+#search_result{
+	vertical-align : top;
+}
+
+#search_btn{
+	color:yellow;
+	font-size:30px;
+	background-color: black;
+}
+
+#type{
+	font-size:20px;
+}
+
+#video_name{
+	color:white;
+	font-size:30px;
+}
+
 body {
 	background-color: black;
 }
 
+header{
+	width: 100%;
+	height: 25%;
+}
+a{
+	text-decoration: none;
+}
+
+font{
+	color: white;
+}
+
+#date{
+	font-size: 3px; 
+	color: rgb(255, 128, 192); 
+	padding-left: 10px;
+}
+
+#del{
+	font-size: 1px; 
+	color: red; 
+	padding-left: 20px;
+}
+
+#btn{
+	color: white;
+}
+#btn:hover{
+	color: red;
+	font-size: 30px;
+}
+
+section{
+	padding-bottom: 20%;
+}
+
+#thumb{
+	width:240px;
+	height:200px;
+}
+#search_td1{
+	width:80;
+}
+#search_td{
+	width:50;
+}
+
+#s_table{
+	padding:10;
+}
 
 
+#play_area{
+	width: 90%; 
+	margin-left: 10%;
+}
 
+#detail_avg{
+	color: rgb(255, 128, 255);
+	font-size: 20px;
+	padding-bottom: 20px;
+	padding-top: 20px;
+	
+}
 
+#cate_ul{
+   list-style-type:none;
+}
 
+#cate_li{
+   display:inline;
+   font-size: 40px;
+   padding: 0px 20px 0px 20px;
+}
 
-
-
-
-
-
+#aa{
+   text-decoration:none;
+   color: orange;
+}

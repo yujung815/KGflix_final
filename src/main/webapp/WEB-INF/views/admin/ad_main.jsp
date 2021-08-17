@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>  
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,8 +29,8 @@
 				회원관리
 			</div>
 			<div class="menu2" id="somenu1" style="display:none">
-				<a href="ad_member" id="font">회원정보</a> <br />
-				<a href="ad_cs" id="font">1:1문의관리</a>		
+				<a href="ad_member" id="font2">회원정보</a> <br />
+				<a href="ad_cs" id="font2">1:1문의관리</a>		
 			</div>
 			<br /><br />
 			<div class="menu1" id="bigmenu2"
@@ -38,8 +38,8 @@
 				콘텐츠 관리
 			</div>
 			<div class="menu2" id="somenu2" style="display:none">
-				<a href="ad_videoInsert" id="font">영상등록</a> <br />
-				<a href="ad_videoSearch" id="font">영상수정 / 삭제</a>		
+				<a href="ad_videoInsert" id="font2">영상등록</a> <br />
+				<a href="ad_videoSearch" id="font2">영상수정 / 삭제</a>		
 			</div>
 		</div>
 	</article>
